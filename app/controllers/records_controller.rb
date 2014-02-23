@@ -24,11 +24,11 @@ class RecordsController < ApplicationController
   end
 
   def production
-    log_deploy('Production')
+    log_deploy 'Production'
   end
 
   def testing
-    log_deploy('Testing')
+    log_deploy 'Testing'
   end
 
   private
@@ -36,9 +36,9 @@ class RecordsController < ApplicationController
     def log_deploy(server)
       Record.create(
         name: 'Monitor',
-        email: 'system@mubook.me',
-        title: 'Deploy',
-        message: params.inspect
+        email: "#{params['user']}",
+        title: "#{params['head']} was deployed",
+        message: params['git_log']
       )
 
       Rails.logger.info "New deploy to #{server}"
@@ -49,7 +49,7 @@ class RecordsController < ApplicationController
     def log_error
       Record.create(
         name: 'Monitor',
-        email: 'system@mubook.me',
+        email: 'monitor@mubook.me',
         title: 'Error',
         message: params.inspect
       )

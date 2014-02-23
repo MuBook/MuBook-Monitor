@@ -2,7 +2,7 @@
 
 <ul id="record-list">
   <% @records.each do |record| %>
-    <a href="<%= record_path(record) %>">
+    <a class="record-link" href="<%= record_path(record) %>">
       <li class="record clear-fix">
         <span class="record-name"><%= record.name %></span>
         <span class="record-email"><%= record.email %></span>

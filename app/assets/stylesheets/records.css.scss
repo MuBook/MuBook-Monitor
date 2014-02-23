@@ -9,8 +9,12 @@
   margin: auto;
 }
 
+.record-link:nth-child(2n+1) > .record {
+  background-color: #eee;
+}
+
 .record:hover {
-  background-color: #777;
+  background-color: #777 !important;
 }
 
 .record-name,
@@ -19,6 +23,7 @@
   display: block;
   float: left;
   background-color: inherit;
+  padding: 5px 0;
 }
 
 .record-name {

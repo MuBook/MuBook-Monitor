@@ -17,7 +17,7 @@
 
 <p>
   <strong>Message:</strong>
-  <%= @record.message %>
+  <pre><%= @record.message %></pre>
 </p>
 
-<%= link_to 'Back', records_path %>
+<%= link_to 'Back', records_path, class: 'btn btn-default' %>
