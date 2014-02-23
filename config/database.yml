@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: mubook-monitor
+  pool: 5
+  username: postgres
+  password: pochen
