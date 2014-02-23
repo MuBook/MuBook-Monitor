@@ -1,6 +1,7 @@
 class RecordsController < ApplicationController
   before_action :set_record, only: [:show]
 
+  before_filter :set_cross_domain_header, only: [:create]
   skip_before_filter :verify_authenticity_token
 
   rescue_from ActiveRecord::ActiveRecordError, with: :log_error
@@ -60,6 +61,11 @@ class RecordsController < ApplicationController
       Rails.logger.error "Error with request: #{params.inspect}"
 
       head :internal_server_error
+    end
+
+    def set_cross_domain_header
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'POST'
     end
 
     def set_record
