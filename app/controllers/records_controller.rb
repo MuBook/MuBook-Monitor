@@ -13,7 +13,7 @@ class RecordsController < ApplicationController
 
     respond_to do |format|
       if @record.save
-        format.html { head: :created }
+        format.html { head :created }
         format.json { render json: @record }
       else
         Record.create(
@@ -23,7 +23,7 @@ class RecordsController < ApplicationController
           message: JSON.pretty_generate(record_params)
         )
 
-        head: :internal_server_error
+        head :internal_server_error
       end
     end
   end
