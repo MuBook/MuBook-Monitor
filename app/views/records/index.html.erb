@@ -1,27 +1,15 @@
-<h1>Listing records</h1>
+<h1>Monitor records</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Title</th>
-      <th>Message</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<ul id="record-list">
+  <% @records.each do |record| %>
+    <a href="<%= record_path(record) %>">
+      <li class="record clear-fix">
+        <span class="record-name"><%= record.name %></span>
+        <span class="record-email"><%= record.email %></span>
+        <span class="record-title"><%= record.title %></span>
+      </li>
+    </a>
+  <% end %>
+</ul>
 
-  <tbody>
-    <% @records.each do |record| %>
-      <tr>
-        <td><%= record.name %></td>
-        <td><%= record.email %></td>
-        <td><%= record.title %></td>
-        <td><%= record.message %></td>
-        <td><%= link_to 'Show', record %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= paginate @records %>

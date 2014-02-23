@@ -17,6 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'kaminari'
 gem 'faraday'
 gem 'figaro'
 gem 'rails_12factor', group: :production

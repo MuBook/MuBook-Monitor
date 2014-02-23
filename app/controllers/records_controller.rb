@@ -1,8 +1,12 @@
 class RecordsController < ApplicationController
   before_action :set_record, only: [:show]
 
+  skip_before_filter :verify_authenticity_token
+
+  rescue_from ActiveRecord::ActiveRecordError, with: :log_error
+
   def index
-    @records = Record.all
+    @records = Record.page(params[:page])
   end
 
   def show
@@ -12,23 +16,49 @@ class RecordsController < ApplicationController
     @record = Record.new(record_params)
 
     respond_to do |format|
-      if @record.save
+      if @record.save!
         format.html { head :created }
         format.json { render json: @record }
-      else
-        Record.create(
-          name: 'Monitor',
-          email: 'system@mubook.me',
-          title: 'Error',
-          message: JSON.pretty_generate(record_params)
-        )
-
-        head :internal_server_error
       end
     end
   end
 
+  def production
+    log_deploy('Production')
+  end
+
+  def testing
+    log_deploy('Testing')
+  end
+
   private
+
+    def log_deploy(server)
+      Record.create(
+        name: 'Monitor',
+        email: 'system@mubook.me',
+        title: 'Deploy',
+        message: JSON.pretty_generate(record_params)
+      )
+
+      Rails.logger.info "New deploy to #{server}"
+
+      head :created
+    end
+
+    def log_error
+      Record.create(
+        name: 'Monitor',
+        email: 'system@mubook.me',
+        title: 'Error',
+        message: JSON.pretty_generate(record_params)
+      )
+
+      Rails.logger.error "Error with request: #{record_params}"
+
+      head :internal_server_error
+    end
+
     def set_record
       @record = Record.find(params[:id])
     end

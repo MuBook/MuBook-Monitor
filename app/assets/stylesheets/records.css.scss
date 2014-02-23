@@ -1,3 +1,35 @@
 // Place all the styles related to the records controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#record-list {
+  width: 800px;
+  list-style: none;
+  padding: 0;
+  margin: auto;
+}
+
+.record:hover {
+  background-color: #777;
+}
+
+.record-name,
+.record-email,
+.record-title {
+  display: block;
+  float: left;
+  background-color: inherit;
+}
+
+.record-name {
+  width: 200px;
+  text-align: center;
+}
+
+.record-email {
+  width: 240px;
+}
+
+.record-title {
+  width: 360px;
+}
