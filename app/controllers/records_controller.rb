@@ -38,7 +38,7 @@ class RecordsController < ApplicationController
         name: 'Monitor',
         email: 'system@mubook.me',
         title: 'Deploy',
-        message: JSON.pretty_generate(record_params)
+        message: params.inspect
       )
 
       Rails.logger.info "New deploy to #{server}"
@@ -51,10 +51,10 @@ class RecordsController < ApplicationController
         name: 'Monitor',
         email: 'system@mubook.me',
         title: 'Error',
-        message: JSON.pretty_generate(record_params)
+        message: params.inspect
       )
 
-      Rails.logger.error "Error with request: #{record_params}"
+      Rails.logger.error "Error with request: #{params.inspect}"
 
       head :internal_server_error
     end
