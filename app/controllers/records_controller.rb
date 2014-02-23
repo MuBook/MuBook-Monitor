@@ -13,14 +13,17 @@ class RecordsController < ApplicationController
   end
 
   def create
-    @record = Record.new(record_params)
+    message = record_params[:message]
 
-    respond_to do |format|
-      if @record.save!
-        format.html { head :created }
-        format.json { render json: @record }
-      end
-    end
+    @record = Record.new(
+      name: record_params[:name],
+      email: record_params[:email],
+      title: message[0, 35] + (message.size > 35 ? '...' : ''),
+      message: message
+    )
+
+    @record.save!
+    head :created
   end
 
   def production
