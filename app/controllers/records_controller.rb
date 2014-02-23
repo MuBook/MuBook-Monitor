@@ -37,7 +37,7 @@ class RecordsController < ApplicationController
       Record.create(
         name: 'Monitor',
         email: "#{params['user']}",
-        title: "#{params['head']} was deployed",
+        title: "#{params['head']} was deployed to #{server}",
         message: params['git_log']
       )
 
