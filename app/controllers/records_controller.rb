@@ -7,7 +7,7 @@ class RecordsController < ApplicationController
   rescue_from ActiveRecord::ActiveRecordError, with: :log_error
 
   def index
-    @records = Record.page(params[:page])
+    @records = Record.where(name: 'Monitor').page(params[:page])
   end
 
   def show

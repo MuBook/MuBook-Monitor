@@ -1,4 +1,8 @@
 MubookMonitor::Application.routes.draw do
+  get "users/new"
+  get "users/update"
+  get "sessions/new"
+
   resources :records, only: [:index, :show]
 
   post 'api/records',    to: 'records#create'

@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223120714) do
+ActiveRecord::Schema.define(version: 20140224104741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_tokens", force: true do |t|
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "records", force: true do |t|
     t.string   "name"
@@ -26,5 +32,12 @@ ActiveRecord::Schema.define(version: 20140223120714) do
   end
 
   add_index "records", ["created_at"], name: "index_records_on_created_at", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.string   "password_hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
