@@ -14,7 +14,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'bcrypt-ruby'
+gem 'bcrypt'
 gem 'warden'
 gem 'kaminari'
 gem 'faraday'
