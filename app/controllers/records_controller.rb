@@ -7,7 +7,7 @@ class RecordsController < ApplicationController
   rescue_from ActiveRecord::ActiveRecordError, with: :log_error
 
   def index
-    @records = Record.where(name: 'Monitor').page(params[:page])
+    @records = Record.page(params[:page])
   end
 
   def show
@@ -35,44 +35,44 @@ class RecordsController < ApplicationController
     log_deploy 'Testing'
   end
 
-  private
+private
 
-    def log_deploy(server)
-      Record.create(
-        name: 'Monitor',
-        email: "#{params['user']}",
-        title: "#{params['head']} was deployed to #{server}",
-        message: params['git_log']
-      )
+  def log_deploy(server)
+    Record.create(
+      name: 'Monitor',
+      email: "#{params['user']}",
+      title: "#{params['head']} was deployed to #{server}",
+      message: params['git_log']
+    )
 
-      Rails.logger.info "New deploy to #{server}"
+    Rails.logger.info "New deploy to #{server}"
 
-      head :created
-    end
+    head :created
+  end
 
-    def log_error
-      Record.create(
-        name: 'Monitor',
-        email: 'monitor@mubook.me',
-        title: 'Error',
-        message: params.inspect
-      )
+  def log_error
+    Record.create(
+      name: 'Monitor',
+      email: 'monitor@mubook.me',
+      title: 'Error',
+      message: params.inspect
+    )
 
-      Rails.logger.error "Error with request: #{params.inspect}"
+    Rails.logger.error "Error with request: #{params.inspect}"
 
-      head :internal_server_error
-    end
+    head :internal_server_error
+  end
 
-    def set_cross_domain_header
-      headers['Access-Control-Allow-Origin'] = '*'
-      headers['Access-Control-Allow-Methods'] = 'POST'
-    end
+  def set_cross_domain_header
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST'
+  end
 
-    def set_record
-      @record = Record.find(params[:id])
-    end
+  def set_record
+    @record = Record.find(params[:id])
+  end
 
-    def record_params
-      params.require(:record).permit(:name, :email, :title, :message)
-    end
+  def record_params
+    params.require(:record).permit(:name, :email, :title, :message)
+  end
 end

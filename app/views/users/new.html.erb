@@ -1,6 +1,31 @@
-<h1>Sign Up</h1>
+<div id="signup">
+  <h1>Sign Up</h1>
 
-<%= form_for @user do |f|, class: "form" %>
-  <div class="actions"><%= f.submit "Sign Up" %></div>
-<% end %>
+  <%= form_for @user, url: { action: :create } do |f| %>
+    <% if @user.errors.any? %>
+      <% @user.errors.each do |entry, message| %>
+        <div class="alert alert-danger"><%= entry %> <%= message %></div>
+      <% end %>
+    <% end %>
 
+    <div class="form-group">
+      <%= label_tag :email %>
+      <%= f.text_field :email %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password %>
+      <%= f.password_field :password %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="form-group">
+      <%= label_tag :token %>
+      <%= f.text_area :token %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Sign up" %>
+    </div>
+  <% end %>
+</div>

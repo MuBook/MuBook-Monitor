@@ -12,6 +12,14 @@
 <body>
 
 <div id="wrapper">
+  <% if flash[:notice] %>
+    <div class="top-alert alert alert-info">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+  <% if current_user %>
+    <div id="logout"><%= link_to "Log out", logout_path, class: "btn btn-default" %></div>
+  <% end %>
   <%= yield %>
 </div>
 

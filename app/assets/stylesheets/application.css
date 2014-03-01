@@ -15,4 +15,19 @@
 #wrapper {
   width: 1000px;
   margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+#logout {
+  width: 100%;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  text-align: right;
+}
+
+.top-alert {
+  margin: 20px 0;
 }

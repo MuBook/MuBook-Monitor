@@ -11,3 +11,7 @@
 // about supported directives.
 //
 //= require_tree .
+
+$(function() {
+  $(".top-alert").delay(5000).fadeOut(800);
+});
