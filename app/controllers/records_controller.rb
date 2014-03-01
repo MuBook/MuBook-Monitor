@@ -2,7 +2,9 @@ class RecordsController < ApplicationController
   before_action :set_record, only: [:show]
 
   before_filter :set_cross_domain_header, only: [:create]
+
   skip_before_filter :verify_authenticity_token
+  skip_before_filter :login, only: [:create, :production, :testing]
 
   rescue_from ActiveRecord::ActiveRecordError, with: :log_error
 
