@@ -62,7 +62,7 @@ private
 
     Rails.logger.error "Error with request: #{params.inspect}"
 
-    head :internal_server_error
+    head :bad_request
   end
 
   def set_cross_domain_header
