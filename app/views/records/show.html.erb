@@ -11,6 +11,11 @@
 </p>
 
 <p>
+  <strong>when:</strong>
+  <%= @record.created_at.in_time_zone('Sydney') %>
+</p>
+
+<p>
   <strong>Title:</strong>
   <%= @record.title %>
 </p>
